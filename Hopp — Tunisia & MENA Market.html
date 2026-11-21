@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hopp — Tunisia &amp; MENA Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0E1F; --line:rgba(255,255,255,.09); --text:#EEF1FF; --muted:#8A93B8;
+    --lime:#C8F55A; --violet:#8B7CFF; --coral:#FF7A6B; --sky:#5FD4FF; --gold:#FFC857;
+    --disp:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#05070F;min-height:100%}
+  body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);overflow-x:hidden}
+
+  /* wrapper reserves the scaled size so the page always has height */
+  #wrap{position:relative;margin:0 auto;overflow:hidden}
+  .stage{
+    width:1920px;height:1080px;position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0;
+    background:
+      radial-gradient(900px 600px at 50% 54%, rgba(139,124,255,.18), transparent 70%),
+      radial-gradient(700px 500px at 85% 10%, rgba(200,245,90,.07), transparent 70%),
+      linear-gradient(160deg,var(--ink) 0%, #0D1230 60%, var(--ink) 100%);
+  }
+  .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse at center,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse at center,#000 20%,transparent 75%);opacity:.5}
+
+  .in{opacity:0;transform:translateY(24px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @keyframes fade{to{opacity:1}}
+
+  /* header */
+  header{position:absolute;top:52px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-start}
+  .brand{display:flex;align-items:center;gap:14px;font-family:var(--disp);font-weight:700;font-size:34px;letter-spacing:-.5px}
+  .brand-dot{width:38px;height:38px;border-radius:12px;background:var(--lime);display:grid;place-items:center;color:var(--ink);font-size:24px;box-shadow:0 0 30px rgba(200,245,90,.45)}
+  .title{font-family:var(--disp);font-size:56px;font-weight:700;letter-spacing:-1.8px;line-height:1.04;margin-top:24px}
+  .title em{font-style:normal;background:linear-gradient(90deg,var(--lime),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .route{display:flex;align-items:center;gap:0;font-family:var(--disp);font-weight:600;font-size:16px}
+  .route .stop{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted)}
+  .route .stop.now{color:var(--ink);background:var(--lime);border-color:var(--lime);box-shadow:0 0 24px rgba(200,245,90,.4)}
+  .route .dash{width:46px;height:2px;background:repeating-linear-gradient(90deg,var(--lime) 0 6px,transparent 6px 12px);background-size:24px 2px;animation:march 1s linear infinite;opacity:.7}
+  @keyframes march{to{background-position:24px 0}}
+  .route-lbl{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);text-align:right;margin-bottom:10px;font-weight:600}
+
+  /* LEFT */
+  .left{position:absolute;left:80px;top:300px;width:400px}
+  .col-h{font-family:var(--disp);font-size:15px;letter-spacing:3px;text-transform:uppercase;color:var(--coral);font-weight:600;margin-bottom:10px}
+  .col-t{font-family:var(--disp);font-size:30px;font-weight:600;letter-spacing:-.6px;line-height:1.15;margin-bottom:24px}
+  .chaos{display:flex;flex-direction:column;gap:12px}
+  .chip{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:14px;background:rgba(255,122,107,.06);border:1px dashed rgba(255,122,107,.35);font-size:18px;color:#D6D9EE;position:relative;opacity:0;animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards, jitter 3.2s ease-in-out infinite}
+  .chip i{font-style:normal;width:30px;height:30px;border-radius:9px;background:rgba(255,122,107,.15);display:grid;place-items:center;font-size:16px}
+  .chip::after{content:"";position:absolute;left:62px;right:18px;top:50%;height:2px;background:var(--coral);transform:scaleX(0);transform-origin:left;animation:strike .6s ease forwards}
+  .chip:nth-child(1){animation-delay:.6s,1.4s}.chip:nth-child(1)::after{animation-delay:3.4s}
+  .chip:nth-child(2){animation-delay:.72s,1.9s}.chip:nth-child(2)::after{animation-delay:3.55s}
+  .chip:nth-child(3){animation-delay:.84s,1.6s}.chip:nth-child(3)::after{animation-delay:3.7s}
+  .chip:nth-child(4){animation-delay:.96s,2.1s}.chip:nth-child(4)::after{animation-delay:3.85s}
+  .chip:nth-child(5){animation-delay:1.08s,1.7s}.chip:nth-child(5)::after{animation-delay:4s}
+  .chip:nth-child(6){animation-delay:1.2s,2.3s}.chip:nth-child(6)::after{animation-delay:4.15s}
+  @keyframes jitter{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px) rotate(-.4deg)}75%{transform:translateX(3px) rotate(.4deg)}}
+  @keyframes strike{to{transform:scaleX(1)}}
+  .pain{margin-top:20px;font-size:17px;color:var(--muted);line-height:1.5}
+  .pain b{color:var(--text)}
+
+  /* CENTER */
+  .center{position:absolute;left:300px;top:270px;width:640px;height:640px}
+  .rings{position:absolute;inset:0}
+  .rings circle.draw{fill:none;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 2s cubic-bezier(.6,.1,.2,1) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .orbit{position:absolute;inset:0;animation:spin 70s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .planet{position:absolute;left:50%;top:50%;width:0;height:0}
+  .pill{position:absolute;white-space:nowrap;padding:9px 16px;border-radius:999px;background:#151B3D;border:1px solid rgba(95,212,255,.45);font-family:var(--disp);font-weight:600;font-size:16px;color:#DDF5FF;box-shadow:0 0 0 6px rgba(95,212,255,.06),0 8px 30px rgba(0,0,0,.4);opacity:0;transform:translate(-50%,-50%);animation:counter 70s linear infinite, fade .6s ease forwards}
+  .pill.local{border-color:rgba(255,200,87,.6);color:#FFE8B5;box-shadow:0 0 0 6px rgba(255,200,87,.06),0 8px 30px rgba(0,0,0,.4)}
+  @keyframes counter{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+  .spokes{position:absolute;inset:0;overflow:visible}
+  .spokes line{stroke:rgba(95,212,255,.16);stroke-width:1.5}
+  .spokes line.pulse{stroke:var(--lime);stroke-width:3;stroke-linecap:round;stroke-dasharray:14 300;opacity:0;animation:fade .4s ease 3s forwards, flow 2.4s linear infinite}
+  @keyframes flow{from{stroke-dashoffset:0}to{stroke-dashoffset:-314}}
+
+  .ring-label{position:absolute;left:0;right:0;text-align:center;z-index:2;opacity:0;animation:rise .8s ease forwards;text-shadow:0 2px 12px #0A0E1F,0 0 4px #0A0E1F}
+  .ring-label .big{font-family:var(--disp);font-weight:700;letter-spacing:-1px;line-height:1.05}
+  .ring-label .small{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .l1{top:34px;animation-delay:1.5s}.l1 .big{font-size:36px;color:var(--violet)}
+  .l2{top:120px;animation-delay:2s}.l2 .big{font-size:28px;color:var(--sky)}
+  .l3{top:200px;animation-delay:2.4s}.l3 .big{font-size:21px;color:var(--gold)}
+  .l3 .small{font-size:10.5px;letter-spacing:1.5px}
+
+  .core{position:absolute;left:240px;top:240px;width:160px;height:160px;border-radius:50%;transform:scale(0);background:radial-gradient(circle at 35% 30%,#E4FF9A,var(--lime) 45%,#8FBF2A 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink);box-shadow:0 0 80px rgba(200,245,90,.55),0 0 0 12px rgba(200,245,90,.08);animation:pop .9s cubic-bezier(.3,1.6,.5,1) 2.8s forwards, breathe 3.5s ease-in-out 3.8s infinite;z-index:3}
+  .core .h{font-family:var(--disp);font-size:40px;font-weight:700;letter-spacing:-1.5px;line-height:1}
+  .core .s{font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;margin-top:6px;text-align:center;line-height:1.3}
+  @keyframes pop{to{transform:scale(1)}}
+  @keyframes breathe{0%,100%{box-shadow:0 0 80px rgba(200,245,90,.55),0 0 0 12px rgba(200,245,90,.08)}50%{box-shadow:0 0 120px rgba(200,245,90,.8),0 0 0 22px rgba(200,245,90,.1)}}
+  .ripple{position:absolute;left:320px;top:320px;width:160px;height:160px;margin:-80px 0 0 -80px;border-radius:50%;border:2px solid var(--lime);opacity:0;animation:ripple 3.5s ease-out 3.8s infinite}
+  .ripple.r2{animation-delay:5.55s}
+  @keyframes ripple{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(3.4)}}
+
+  .not-compete{position:absolute;left:-200px;right:-200px;margin:0 auto;width:max-content;bottom:-60px;white-space:nowrap;padding:12px 22px;border-radius:14px;background:rgba(200,245,90,.08);border:1px solid rgba(200,245,90,.35);font-size:17px;opacity:0;animation:rise .8s ease 4.4s forwards;z-index:4}
+  .not-compete b{color:var(--lime)}
+
+  /* RIGHT */
+  .right{position:absolute;right:80px;top:330px;width:740px}
+  .right .col-h{color:var(--lime)}
+  .stack{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding:24px 24px 26px;min-height:200px;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);position:relative;overflow:hidden;opacity:0;transform:translateX(40px);animation:slide .8s cubic-bezier(.2,.8,.2,1) forwards}
+  .card::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);transform:translateX(-100%);animation:shine 6s ease-in-out infinite}
+  .card:nth-child(1){animation-delay:3.0s}.card:nth-child(1)::before{animation-delay:5s}
+  .card:nth-child(2){animation-delay:3.2s}.card:nth-child(2)::before{animation-delay:5.4s}
+  .card:nth-child(3){animation-delay:3.4s}.card:nth-child(3)::before{animation-delay:5.8s}
+  .card:nth-child(4){animation-delay:3.6s}.card:nth-child(4)::before{animation-delay:6.2s}
+  @keyframes slide{to{opacity:1;transform:none}}
+  @keyframes shine{0%,70%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+  .ico{flex:0 0 52px;width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:22px}
+  .card h4{font-family:var(--disp);font-size:24px;font-weight:600;letter-spacing:-.3px;margin-bottom:4px}
+  .card p{font-size:16px;color:var(--muted);line-height:1.45}
+  .c1 .ico{background:rgba(139,124,255,.18)}.c2 .ico{background:rgba(95,212,255,.16)}.c3 .ico{background:rgba(255,122,107,.16)}.c4 .ico{background:rgba(200,245,90,.16)}
+
+  /* BOTTOM */
+  .bottom{position:absolute;left:80px;right:80px;bottom:44px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px}
+  .targets{display:flex;gap:10px;align-items:center}
+  .targets .lbl{font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-right:6px}
+  .seg{padding:10px 18px;border-radius:999px;border:1px solid rgba(139,124,255,.45);background:rgba(139,124,255,.10);font-family:var(--disp);font-weight:600;font-size:16px}
+  .stats{display:flex;gap:34px}
+  .stat .n{font-family:var(--disp);font-size:32px;font-weight:700;letter-spacing:-1px;color:var(--lime);line-height:1.1}
+  .stat .d{font-size:13px;color:var(--muted);max-width:180px;line-height:1.35}
+  .src{position:absolute;left:80px;right:80px;bottom:14px;font-size:11px;color:#5A628A;text-align:right}
+
+  /* if the viewer disables motion, jump straight to the final frame */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;animation-iteration-count:1!important}
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+<div class="stage" id="stage">
+  <div class="grid-bg"></div>
+
+  <header>
+    <div>
+      <div class="brand in" style="animation-delay:.05s">hopp</div>
+      <h1 class="title in" style="animation-delay:.2s">Every platform, one control center.<br><em>Plus the services &amp; shield behind every stay.</em></h1>
+    </div>
+    <div class="in" style="animation-delay:.4s">
+      <div class="route-lbl">Go-to-market</div>
+      <div class="route"><span class="stop now">Tunisia</span><span class="dash"></span><span class="stop">Morocco</span><span class="dash"></span><span class="stop">GCC</span></div>
+    </div>
+  </header>
+
+  <!-- CENTER -->
+  <section class="center">
+    <svg class="rings" viewBox="0 0 640 640">
+      <defs><linearGradient id="gV" x1="0" x2="1"><stop offset="0" stop-color="#8B7CFF"/><stop offset="1" stop-color="#5FD4FF"/></linearGradient></defs>
+      <circle cx="320" cy="320" r="300" fill="rgba(139,124,255,.05)"/>
+      <circle class="draw" cx="320" cy="320" r="300" stroke="url(#gV)" stroke-width="2.5" style="--len:1885;animation-delay:.6s"/>
+      <circle cx="320" cy="320" r="215" fill="rgba(95,212,255,.05)"/>
+      <circle class="draw" cx="320" cy="320" r="215" stroke="#5FD4FF" stroke-width="2" style="--len:1351;animation-delay:1.1s"/>
+      <circle cx="320" cy="320" r="135" fill="rgba(255,200,87,.06)"/>
+      <circle class="draw" cx="320" cy="320" r="135" stroke="#FFC857" stroke-width="2" stroke-dasharray="4 7" style="--len:849;animation-delay:1.6s"/>
+    </svg>
+
+    <div class="ring-label l1"><div class="small">MENA hospitality market</div><div class="big">$<span class="count" data-to="310" data-delay="1500">0</span>B</div></div>
+    <div class="ring-label l2"><div class="small">Tunisia tourism revenue</div><div class="big"><span class="count" data-to="8.1" data-dec="1" data-delay="2000">0</span>B TND</div></div>
+    <div class="ring-label l3"><div class="small">Guesthouses &amp; rentals</div><div class="big"><span class="count" data-to="0.62" data-dec="2" data-delay="2400">0</span>B TND</div></div>
+
+    <div class="orbit">
+      <svg class="spokes" viewBox="0 0 640 640"><g id="spokes"></g></svg>
+      <div id="planets"></div>
+    </div>
+
+    <div class="ripple"></div><div class="ripple r2"></div>
+    <div class="core"><div class="h">hopp</div><div class="s">Central management<br>Services · Shield</div></div>
+
+    <div class="not-compete">Airbnb, Booking &amp; tour operators stay <b>distribution partners</b>, not competitors</div>
+  </section>
+
+  <!-- RIGHT -->
+  <section class="right">
+    <div class="col-h in" style="animation-delay:2.9s;margin-bottom:22px">What we provide</div>
+    <div class="stack">
+      <div class="card c1"><div class="ico">🏨</div><div><h4>PMS</h4><p>Reservations, calendar, pricing, guests &amp; invoicing in one place.</p></div></div>
+      <div class="card c2"><div class="ico">🔁</div><div><h4>Channel manager</h4><p>Real-time sync of rates &amp; availability across every OTA. Zero double bookings.</p></div></div>
+      <div class="card c3"><div class="ico">🧹</div><div><h4>Services marketplace</h4><p>Cleaning, maintenance, photos &amp; marketing, booked and tracked in-app.</p></div></div>
+      <div class="card c4"><div class="ico">🛡️</div><div><h4>Legal shield</h4><p>Deposits (caution), contracts, guest ID checks &amp; dispute evidence.</p></div></div>
+    </div>
+  </section>
+
+  <!-- BOTTOM -->
+  <div class="bottom">
+    <div class="targets in" style="animation-delay:4.8s">
+      <span class="lbl">Built for</span>
+      <span class="seg">Rental managers</span>
+      <span class="seg">Hotels</span>
+      <span class="seg">Maisons d'hôtes</span>
+    </div>
+    <div class="stats in" style="animation-delay:5s">
+      <div class="stat"><div class="n">11M+</div><div class="d">tourists in Tunisia in 2025, an all-time record</div></div>
+      <div class="stat"><div class="n">×2</div><div class="d">guesthouse revenue by 2030 (0.62 → 1.31B TND)</div></div>
+      <div class="stat"><div class="n">2,200</div><div class="d">rural &amp; family lodgings being formalised</div></div>
+      <div class="stat"><div class="n">$487B</div><div class="d">MENA hospitality by 2032</div></div>
+    </div>
+  </div>
+  <div class="src">Sources: Fortune Business Insights / FHS (MENA hospitality 2025 &amp; 2032) · Central Bank of Tunisia via Webdo (2025 tourism revenue, arrivals) · IACE via L'Économiste Maghrébin &amp; Tunisie Numérique (guesthouse segment) · Ministry of Tourism via Webdo (2,200 establishments)</div>
+</div>
+</div>
+
+<script>
+  // Scale the 1920×1080 stage to the window; never collapse to zero in short frames
+  const wrap=document.getElementById('wrap'), stage=document.getElementById('stage');
+  function fit(){
+    const w=document.documentElement.clientWidth||innerWidth||1920;
+    const h=innerHeight;
+    let s=w/1920;
+    if(h>=300) s=Math.min(s,h/1080);
+    s=Math.max(s,0.2);
+    stage.style.transform=`scale(${s})`;
+    wrap.style.width=(1920*s)+'px';
+    wrap.style.height=(1080*s)+'px';
+    if(h>=300) wrap.style.marginTop=Math.max(0,(h-1080*s)/2)+'px'; else wrap.style.marginTop='0';
+  }
+  addEventListener('resize',fit); fit();
+
+  // Orbiting platforms + spokes into the core
+  const platforms=[['Airbnb'],['Booking.com'],['Expedia'],['Tour operators',1],['Agoda'],['Google Hotels'],['Direct site',1]];
+  const R=300, C=320, ns='http://www.w3.org/2000/svg';
+  const planets=document.getElementById('planets'), spokes=document.getElementById('spokes');
+  platforms.forEach(([name,local],i)=>{
+    const a=((i+0.5)/platforms.length)*Math.PI*2-Math.PI/2;
+    const x=Math.cos(a)*R, y=Math.sin(a)*R;
+    const p=document.createElement('div');
+    p.className='planet';
+    p.style.transform=`translate(${x}px,${y}px)`;
+    const pill=document.createElement('div');
+    pill.className='pill'+(local?' local':'');
+    pill.textContent=name;
+    pill.style.animationDelay=`0s, ${2.4+i*.12}s`;
+    p.appendChild(pill); planets.appendChild(p);
+    const sx=C+x, sy=C+y, ex=C+Math.cos(a)*80, ey=C+Math.sin(a)*80;
+    const mk=()=>{const l=document.createElementNS(ns,'line');l.setAttribute('x1',sx);l.setAttribute('y1',sy);l.setAttribute('x2',ex);l.setAttribute('y2',ey);return l;};
+    const base=mk(), pulse=mk();
+    pulse.setAttribute('class','pulse');
+    pulse.style.animationDelay=`3s, ${3+i*.33}s`;
+    spokes.appendChild(base); spokes.appendChild(pulse);
+  });
+
+  // Count-up numbers
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.count').forEach(el=>{
+    const to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), delay=reduce?0:+el.dataset.delay;
+    if(reduce){el.textContent=to.toFixed(dec);return;}
+    setTimeout(()=>{
+      const t0=performance.now(), dur=1600;
+      (function tick(t){const k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3);el.textContent=(to*e).toFixed(dec);if(k<1)requestAnimationFrame(tick);})(t0);
+    },delay);
+  });
+</script>
+</body>
+</html>
